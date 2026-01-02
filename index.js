@@ -10,19 +10,18 @@ const path = require('path');
 
 const app = express();
 const PORT = 3000;
-
+require('dotenv').config();
 app.use(cors({
     origin:'*'
 }));
 app.use(bodyParser.json());
 
-const db = mysql.createConnection({
-    host: 'bhk17mabctphmv6kqvh9-mysql.services.clever-cloud.com',
-    user: 'uvz3eengrfponnpb',
-    password: '3m5xZr6WrmMO4DUuG2q2',
-    database: 'bhk17mabctphmv6kqvh9',
-    port: 3306
-});
+const db = mysql.createConnection({ 
+    host: process.env.DB_HOST, 
+    user: process.env.DB_USER, 
+    password: process.env.DB_PASSWORD,
+     database: process.env.DB_NAME, 
+     port: process.env.DB_PORT });
 
 db.connect(err => {
     if (err) {
